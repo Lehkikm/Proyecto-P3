@@ -12,7 +12,7 @@ using System;
 namespace SistemaCalilficaciones.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171207041400_DbSistemaCalificaciones")]
+    [Migration("20171207184444_DbSistemaCalificaciones")]
     partial class DbSistemaCalificaciones
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -128,6 +128,32 @@ namespace SistemaCalilficaciones.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("SistemaCalilficaciones.Models.Anotacion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AsignaturaId");
+
+                    b.Property<string>("Cuerpo")
+                        .IsRequired();
+
+                    b.Property<DateTime>("Fecha");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired();
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AsignaturaId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Anotaciones");
                 });
 
             modelBuilder.Entity("SistemaCalilficaciones.Models.ApplicationUser", b =>
@@ -267,6 +293,18 @@ namespace SistemaCalilficaciones.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SistemaCalilficaciones.Models.Anotacion", b =>
+                {
+                    b.HasOne("SistemaCalilficaciones.Models.Asignatura", "Asignatura")
+                        .WithMany()
+                        .HasForeignKey("AsignaturaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SistemaCalilficaciones.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("SistemaCalilficaciones.Models.Asignatura", b =>

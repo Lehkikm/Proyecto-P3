@@ -1,3 +1,4 @@
+@using System
 @model AsignaturaViewModel
 <!-- Materia -->
 <div class="row">
@@ -8,7 +9,6 @@
         <br/>
     </div>
 </div>
-
 <!-- Acciones -->
 <div class="row">
     <div class="col-md-12">
@@ -28,29 +28,30 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
+            
+            <!--Notas de la clase-->
             <div class="tab-pane active" id="anotaciones" role="tabpanel">
                 <br/>
                 <br/>
                 <br/>
+                <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modal_AgregarAnotacion">+ Agregar</button>
+                <p style="margin-bottom: 20px;"></p>
                 <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                    <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small>3 days ago</small>
-                    </div>
-                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                    <small>Donec id elit non mi porta.</small>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small class="text-muted">3 days ago</small>
-                    </div>
-                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                    <small class="text-muted">Donec id elit non mi porta.</small>
-                </a>
+                    @foreach(var anotacion in Model.Anotaciones)
+                    {
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                            <!--Título-->
+                            <h5 class="mb-1">@anotacion.Titulo</h5>
+                            <small class="text-muted">@anotacion.Fecha</small>
+                            </div>
+                            <p class="mb-1">@anotacion.Cuerpo</p>
+                        </a>
+                        <br/>
+                    }
                 </div>
             </div>
+
             <div class="tab-pane" id="libretaCalificaciones" role="tabpanel">
                 <br/>
                 <br/>
@@ -105,8 +106,56 @@
     </div>
 </div>
 
+<!-- Modal - Para agregar una nueva anotación.-->
+<div class="modal fade" id="modal_AgregarAnotacion" tabindex="-1" role="dialog" aria-labelledby="label_ModalAgregarAnotacion" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="label_ModalAgregarAnotacion">Agregar anotación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form asp-action="AgregarAnotacion" class="row" method="post" enctype="multipart/form-data">
+                
+                <input type="hidden" asp-for="Asignatura.Id" value="@Model.Asignatura.Id" readonly/>
+             
+                <!--Fecha-->
+                <div class="form-group col-md-12">
+                    <label>
+                        <span style="font-weight: bold; color: #c4c4c4;">@DateTime.Now.ToString("dd-MM-yyy"),</span>
+                        <span style="font-weight: bold; color: #c4c4c4">@DateTime.Now.ToString("HH:mm")</span>
+                    </label>
+                    <input asp-for="Anotacion.Fecha" class="form-control" type="date" value="@DateTime.Now" hidden="hidden"/>
+                </div>
+
+                <!--Título-->
+                <div class="form-group col-md-12">
+                    <label asp-for="Anotacion.Titulo"></label>
+                    <input asp-for="Anotacion.Titulo" class="form-control" type="text"/>
+                </div>
+
+                <!--Cuerpo-->
+                <div class="form-group col-md-12">
+                    <label asp-for="Anotacion.Cuerpo"></label>
+                    <textarea asp-for="Anotacion.Cuerpo" class="form-control" type="text" rows="7"></textarea>
+                </div>
+
+            </div>
+            <!--TODO: HAcer que funcione el boton submit-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar nota</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
 @section Scripts {
     <script>
+
         /* TODO: Hacer que alterne entre active y sin active.
         $('#misEtiquetas a').click(function (e) {
             e.preventDefault();

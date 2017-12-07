@@ -185,6 +185,45 @@ namespace SistemaCalilficaciones.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Anotaciones",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AsignaturaId = table.Column<int>(nullable: false),
+                    Cuerpo = table.Column<string>(nullable: false),
+                    Fecha = table.Column<DateTime>(nullable: false),
+                    Titulo = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Anotaciones", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Anotaciones_Asignaturas_AsignaturaId",
+                        column: x => x.AsignaturaId,
+                        principalTable: "Asignaturas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Anotaciones_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Anotaciones_AsignaturaId",
+                table: "Anotaciones",
+                column: "AsignaturaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Anotaciones_UserId",
+                table: "Anotaciones",
+                column: "UserId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Asignaturas_UserId",
                 table: "Asignaturas",
@@ -233,7 +272,7 @@ namespace SistemaCalilficaciones.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Asignaturas");
+                name: "Anotaciones");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -249,6 +288,9 @@ namespace SistemaCalilficaciones.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Asignaturas");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

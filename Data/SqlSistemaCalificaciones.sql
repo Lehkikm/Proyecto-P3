@@ -7,3 +7,4 @@ select * from AspNetRoles -- Permite ver los tipos de rol que hay.
 
 select * from AspNetUserRoles -- Tabla que almacena el rol asociado a cada usuario
 
+select * from Anotaciones

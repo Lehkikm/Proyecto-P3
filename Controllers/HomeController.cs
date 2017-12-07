@@ -48,12 +48,12 @@ namespace SistemaCalilficaciones.Controllers {
             var role = await _userManager.GetRolesAsync (usuario);
 
             if (role.First () == "Estudiante") {
-                return RedirectToAction ("IndexUsuario");
+                return RedirectToAction ("IndexEstudiante");
             }
 
             var viewModel = new IndexViewModel () {
                 Usuario = usuario,
-                AsignaturasImpartidas = _context.Asignaturas.Where(a => a.UserId == usuario.Id).ToList()
+                AsignaturasImpartidas = _context.Asignaturas.Where (a => a.UserId == usuario.Id).ToList ()
             };
             return View (viewModel);
         }
@@ -70,12 +70,28 @@ namespace SistemaCalilficaciones.Controllers {
         // Muestra los datos de una Asignatura
         [HttpGet]
         public IActionResult Asignatura (int id) {
-            var asignatura = _context.Asignaturas.Where(a => a.Id == id).FirstOrDefault();
-            var viewModel = new AsignaturaViewModel()
-            {
-                Asignatura = asignatura
+            var asignatura = _context.Asignaturas.Where (a => a.Id == id).FirstOrDefault ();
+            var anotaciones = _context.Anotaciones.Where (nota => nota.AsignaturaId == asignatura.Id && nota.UserId == asignatura.UserId).ToList ();
+            var viewModel = new AsignaturaViewModel () {
+                Asignatura = asignatura,
+                //TODO: Falta por mostrar las anotaciones de la asignatura
+                Anotaciones = anotaciones
             };
             return View (viewModel);
+        }
+
+        // Agrega una anotación a la materia elegida.
+        [HttpPost]
+        public async Task<IActionResult> AgregarAnotacion (AsignaturaViewModel viewModel) {
+            var anotacion = viewModel.Anotacion;
+            var usuarioLogueado = await _userManager.GetUserAsync (User);
+            anotacion.UserId = usuarioLogueado.Id;
+            anotacion.AsignaturaId = viewModel.Asignatura.Id;
+            anotacion.Fecha = DateTime.Now;
+
+            _context.Anotaciones.Add (anotacion);
+            _context.SaveChanges();
+            return RedirectToAction ("Asignatura", new { Id = viewModel.Asignatura.Id });
         }
 
         // Gestiona las asignaturas
@@ -111,7 +127,7 @@ namespace SistemaCalilficaciones.Controllers {
         [HttpGet]
         public async Task<IActionResult> PerfilUsuario () {
             var usuarioLogueado = await _userManager.GetUserAsync (User);
-            
+
             var model = new EditarPerfilUsuarioViewModel () {
                 Nombre = usuarioLogueado.Nombre,
                 Telefono = usuarioLogueado.Telefono,
@@ -147,9 +163,9 @@ namespace SistemaCalilficaciones.Controllers {
                 usuarioLogueado.Direccion = viewModel.Direccion;
                 usuarioLogueado.UrlFotoPerfil = usuarioLogueado.UrlFotoPerfil;
 
-                await _userManager.UpdateAsync(usuarioLogueado);
+                await _userManager.UpdateAsync (usuarioLogueado);
 
-                return RedirectToAction("PerfilUsuario");
+                return RedirectToAction ("PerfilUsuario");
             } else {
                 return View ();
             }
