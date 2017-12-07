@@ -1,0 +1,132 @@
+@model EditarPerfilUsuarioViewModel
+
+<!--Perfil de usuario-->
+<div class="row">
+    <div class="col-md-3">
+        <h1>Mi perfil</h1>
+    </div>
+</div>
+
+<!-- Mostrando datos del usuario-->
+<div class="row tarjeta-perfil">
+
+    <!--Imagen-->
+    <div class="col-md-4 flex-parent">
+        <div class="flex-child centrar-horizontalmente">
+            <div class="tarjeta-usuario-perfil" style="background-image: url(@Model.UrlFotoPerfil);" href="#"></div>
+        </div>
+    </div>
+
+    <!--Contenido-->
+    <div class="col-md-8 flex-parent">
+    
+        <div class="list-group flex-child">
+            <a href="#" class="list-group-item list-group-item-action">
+                <h3>@Model.Nombre</h3>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                <b>Teléfono:</b> @Model.Telefono
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                <b>Cédula:</b> @Model.Cedula
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                <b>Fecha de nacimiento: </b>@Model.FechaNacimiento
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                <b>Dirección:</b> @Model.Direccion
+            </a>
+        </div>
+    </div>
+</div>
+
+<div clas="row">
+    <div class="col-md-12" style="text-align: right">
+        <button class="btn btn-outline-warning" style="margin-right: 50px;" data-toggle="modal" data-target="#modal_EditarPerfil">Editar Información</button>
+    </div>
+</div>
+
+<!-- Modal - Para edición de los datos del usuario-->
+<div class="modal fade" id="modal_EditarPerfil" tabindex="-1" role="dialog" aria-labelledby="labelModal_EditarPerfil" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="labelModal_EditarPerfil">Editar perfil</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form asp-action="PerfilUsuario" class="row" method="post" enctype="multipart/form-data">
+                <!--Foto de perfil-->
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    <div class="centrar-horizontalmente">
+                        <div class="tarjeta-usuario-img" id="img_ImagenPerfil" style="background-image: url(@Model.UrlFotoPerfil)" href="#"></div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12" style="height: 15px;"></div>
+
+                <div class="form-group col-md-12">
+                    <label asp-for="UrlFotoPerfil"></label>
+                    <input asp-for="ImagenPerfil" id="input_ImagenPerfil" class="form-control" type="file"/>
+                </div>
+
+                <div class="col-md-12" style="height: 20px;"></div>
+
+                <!--Nombre-->
+                <div class="form-group col-md-6">
+                    <label asp-for="Nombre"></label>
+                    <input asp-for="Nombre" class="form-control" type="text"/>
+                </div>
+                <!--Teléfono-->
+                <div class="form-group col-md-6">
+                    <label asp-for="Telefono"></label>
+                    <input asp-for="Telefono" class="form-control" type="text"/>
+                </div>
+                <!--Cédula-->
+                <div class="form-group col-md-6">
+                    <label asp-for="Cedula"></label>
+                    <input asp-for="Cedula" class="form-control" type="text"/>
+                </div>
+                <!--Fecha de Nacimiento-->
+                <div class="form-group col-md-6">
+                    <label asp-for="FechaNacimiento"></label>
+                    <input asp-for="FechaNacimiento" class="form-control" type="date"/>
+                </div>
+                <!--Dirección-->
+                <div class="form-group col-md-12">
+                    <label asp-for="Direccion"></label>
+                    <textarea asp-for="Direccion" class="form-control" type="text"></textarea>
+                </div>
+            </div>
+            <!--TODO: HAcer que funcione el boton submit-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+@section Scripts {
+    <script>
+         // TODO: Hacer que se muestre la imagen al seleccionar el earchivo.
+        $("#input_ImagenPerfil").change(function() {
+            mostrarFoto(this);
+            console.log("Me haz tocado >.<");
+        });
+        function mostrarFoto(foto) {
+            if (foto.files && foto.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#img_ImagenPerfil').attr('style', 'background-image: url('+e.target.result+')');
+                    console.log("Estoy aquí >.<");
+                }
+                reader.readAsDataURL(foto.files[0]);
+            }
+        }
+    </script>
+}
+       

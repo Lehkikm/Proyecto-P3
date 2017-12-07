@@ -1,0 +1,101 @@
+﻿@model SistemaCalilficaciones.ViewModels.IndexViewModel
+    
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<!-- Usuario -->
+<div class="row tarjeta-usuario">
+    
+    <!--Imagen-->
+    <div class="col-md-2 flex-parent">
+        <div class="flex-child centrar-horizontalmente">
+            <div class="tarjeta-usuario-img" style="background-image: url(@Model.Usuario.UrlFotoPerfil)" href="#"></div>
+        </div>
+    </div>
+
+    <!--Contenido-->
+    <div class="col-md-10 flex-parent">
+        <div class="flex-child">
+            <h5>@Model.Usuario.Nombre</h5>
+            <h5>Periodo Enero - Abril del 2017</h5>
+        </div>
+    </div>
+
+</div>
+
+<br/>
+
+<!-- Materias que imparto -->
+<div class="row">
+
+    <div class="col-md-12">
+        <h3>Materias que imparto</h3>
+        <hr/>
+    </div>
+    <div class="col-md-4">
+        <div class="materias flex-parent">
+            <span class="flex-child centrar-horizontalmente">Columna 1 2 y 3</</span>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="materias flex-parent">
+            <span class="flex-child centrar-horizontalmente">Columna 1 2 y 3</</span>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="materias flex-parent">
+            <span class="flex-child centrar-horizontalmente">Columna 1 2 y 3</</span>
+        </div>
+    </div>
+</div>
+
+<br/>
+<br/>
+
+<!-- Registros anteriores -->
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Registros anteriores</h3>
+        <hr/>
+    </div>
+
+    <div class="col-md-6">
+        <form>
+            <div class="form-group">
+                <label for="sel1">Elige una materia</label>
+                <select class="form-control" id="sel1">
+                    <option>Materia 1</option>
+                    <option>Materia 2</option>
+                    <option>Materia 3</option>
+                    <option>Materia 4</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="sel1">Elige un año</label>
+                <select class="form-control" id="sel1">
+                    <option>1998</option>
+                    <option>2005</option>
+                    <option>1090</option>
+                    <option>2013</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="sel1">Elige un periodo</label>
+                <select class="form-control" id="sel1">
+                    <option>Julio - Octubre</option>
+                    <option>Enero - Abril</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary">Generar</button>
+        </form>
+    </div>
+</div>
+
+   

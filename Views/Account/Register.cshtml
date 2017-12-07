@@ -1,0 +1,56 @@
+﻿@model RegisterViewModel;
+@{
+    ViewData["Title"] = "Registro";
+    Layout = "_LayoutIdentity";
+}
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center">
+        <h2>@ViewData["Title"]</h2>
+        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+            <p>Crea una nueva cuenta</p>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <!--Nombre-->
+            <div class="form-group">
+                <input asp-for="Nombre" class="form-control" placeholder="Sergio Ferreras"/>
+                <span style="text-align: center;" asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            <!--TODO: Tipo de usuario-->
+            <div class="form-group">
+                <select asp-for="TipoUsuarioSeleccionado" class="form-control" id="select_TipoUsuario" required>
+                    @foreach(var usuario in Model.TipoUsuario)
+                    {
+                         <option>@usuario.Name</option>
+                    }
+                </select>
+                <small class="form-text text-muted">Aquí debes elegir el tipo de usuario que eres</small>
+            </div>
+
+            <!--E-mail-->
+            <div class="form-group">
+                <input asp-for="Email" class="form-control" placeholder="correo@email.com"/>
+                <span style="text-align: center;" asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <!--Clave 1-->
+            <div class="form-group">
+                <input asp-for="Password" class="form-control" placeholder="•••••••"/>
+                <span style="text-align: center;" asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <!--Clave 2-->
+            <div class="form-group">
+                <input asp-for="ConfirmPassword" class="form-control" placeholder="•••••••"/>
+                <span style="text-align: center;" asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button type="submit" class="form-control btn btn-primary btn-lg btn-blocks">Registrarme</button>
+        </form>
+
+        <br/>
+        <button asp-controller="Account" asp-action="Login" type="button" class="btn btn-link">¡Ya tengo una cuenta!</button>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

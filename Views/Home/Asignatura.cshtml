@@ -1,0 +1,118 @@
+
+<!-- Materia -->
+<div class="row">
+    <div class="col-md-12">
+        <h1>Asignatura Determinada</h1>
+        <h2 class="subtitulo eliminar-margen-entre-lineas">Sección: Lunes y Jueves de 10:00 a 13:00</h2>
+        <h3 class="subtitulo eliminar-margen-entre-lineas">Aula #1</h3>
+        <br/>
+    </div>
+</div>
+
+<!-- Acciones -->
+<div class="row">
+    <div class="col-md-12">
+
+        <!-- Nav tabs -->
+        <ul id="misEtiquetas" class="nav nav-tabs" style="float:right;" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#anotaciones" name="anotdd" role="tab">Anotaciones</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#libretaCalificaciones" role="tab">Libreta Calificaciones</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#reportes" role="tab">Reportes</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="anotaciones" role="tabpanel">
+                <br/>
+                <br/>
+                <br/>
+                <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                    <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">List group item heading</h5>
+                    <small>3 days ago</small>
+                    </div>
+                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                    <small>Donec id elit non mi porta.</small>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">List group item heading</h5>
+                    <small class="text-muted">3 days ago</small>
+                    </div>
+                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                    <small class="text-muted">Donec id elit non mi porta.</small>
+                </a>
+                </div>
+            </div>
+            <div class="tab-pane" id="libretaCalificaciones" role="tabpanel">
+                <br/>
+                <br/>
+                <br/>
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Participación (30)</th>
+                            <th>Asistencia (10)</th>
+                            <th>Prácticas (30)</th>
+                            <th>Examen (30)</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Column content</td>
+                            <td>Column content</td>
+                            <td>Column content</td>
+                            <td>Column content</td>
+                            <td>Column content</td>
+                            <td>Column content</td>
+                        </tr>
+                           <tr>
+                            <td>2</td>
+                            <td>Column content</td>
+                            <td>Column content</td>
+                            <td>Column content</td>
+                            <td>Column content</td>
+                            <td>Column content</td>
+                            <td>Column content</td>
+                        </tr>
+                           <tr>
+                            <td>3</td>
+                            <td>Column content</td>
+                            <td>Column content</td>
+                            <td>Column content</td>
+                            <td>Column content</td>
+                            <td>Column content</td>
+                            <td>Column content</td>
+                        </tr>
+                    </tbody>
+                </table>     
+            </div>
+            <div class="tab-pane" id="reportes" role="tabpanel">...</div>
+            <div class="tab-pane" id="settings" role="tabpanel">...</div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        /* TODO: Hacer que alterne entre active y sin active.
+        $('#misEtiquetas a').click(function (e) {
+            e.preventDefault();
+
+            $(this).tab('show');
+            console.log($(this));
+        });*/
+    </script>
+}

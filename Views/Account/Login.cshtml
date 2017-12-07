@@ -1,0 +1,60 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@model LoginViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "Iniciar Sesión";
+    Layout = "_LayoutIdentity";
+}
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center">
+        <h1>@ViewData["Title"]</h1>
+        <section>
+            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                <p style="font-size: .8em;">
+                    Acceder
+                </p>
+                
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <input asp-for="Email" class="form-control" placeholder="correo@email.com"/>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Password" class="form-control" placeholder="••••••••"/>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="form-control btn btn-primary btn-lg btn-blocks">Iniciar Sesión</button>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="RememberMe">
+                            <input asp-for="RememberMe" />
+                            @Html.DisplayNameFor(m => m.RememberMe)
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p>
+                        <a asp-action="ForgotPassword">¿Olvidaste tu contraseña?</a>
+                        <br/>
+                        <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">¡Regístrate y sé uno de nosotros!</a>
+                    <p>
+                  
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

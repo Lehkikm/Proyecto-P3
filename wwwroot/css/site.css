@@ -1,0 +1,131 @@
+﻿body {
+    padding-bottom: 20px;
+}
+
+/* -------------------------- VISTAS --------------------------*/
+
+/* Inicio */
+.tarjeta-usuario {
+  background-color: inherit;
+  height: 200px;
+  cursor: pointer;
+  overflow: hidden; 
+}
+
+.tarjeta-usuario-img {  
+  background-repeat:no-repeat; /*Esto es por si la img es pequeña*/
+  background-position:50%; /*Centrando en div*/
+  background-size:100%; /*Sirve para acercar 300px la imagen*/
+  border-radius: 50%;
+  border: 1px solid #c4c4c4;
+  width: 150px;
+  height: 150px; 
+}
+
+.materias {
+  text-align: center;
+  border: 1px solid #c4c4c4;
+  height: 6em;
+}
+
+/* Materia */
+.subtitulo {
+  color: #c4c4c4;
+  font-weight: normal;
+}
+
+.eliminar-margen-entre-lineas {
+  line-height: 1;
+}
+
+/* PerfilUsuario*/
+
+.perfil-img{  
+  background-repeat:no-repeat; /*Esto es por si la img es pequeña*/
+  background-position:50%; /*Centrando en div*/
+  background-size:100%; /*Sirve para acercar 300px la imagen*/
+  border-radius: 50%;
+  border: 1px solid #c4c4c4;
+  width: 300px;
+  height: 300px; 
+}
+
+.tarjeta-usuario-perfil {  
+  background-repeat:no-repeat; /*Esto es por si la img es pequeña*/
+  background-position:50%; /*Centrando en div*/
+  background-size:100%; /*Sirve para acercar 300px la imagen*/
+  border-radius: 50%;
+  border: 1px solid #c4c4c4;
+  width: 250px;
+  height: 250px; 
+}
+
+.tarjeta-perfil {
+  background-color: inherit;
+  height: 400px;
+  cursor: pointer;
+  overflow: hidden; 
+}
+
+
+
+
+/* -------------------------- HERRAMIENTAS --------------------------*/
+
+/* Encargadas de centrar verticalmente*/
+.flex-parent{
+  display: -ms-flex;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.flex-child{
+  display: -ms-flex;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* Encargada de centrar horizontalmente */
+.centrar-horizontalmente {
+  margin: 0 auto;
+}
+
+/* -------------------------- CONFIGURACIONES GENERALES --------------------------*/
+
+
+/* MODIFICACIONES A BOOTSTRAP */
+/* @media(min-width:768px){
+.col-md-4 {
+  margin-left:10px;
+  margin-right:10px;
+  }
+} */
+
+.center-block {
+  float: none;
+}
+
+.fade.in {
+  opacity: 1;
+}
+.modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+.modal-backdrop.in {
+  opacity: 0.5;
+}
+
+
+
+/* .tarjeta-usuario-texto {
+    margin-top: 25%;
+    line-height: 200px;
+    text-align: center;
+    font-size: 70px;
+    color: white;
+    text-shadow: 2px 5px 19px black
+} */

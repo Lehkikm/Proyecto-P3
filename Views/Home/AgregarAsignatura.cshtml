@@ -1,0 +1,84 @@
+@model AgregarAsignaturaViewModel
+
+<!-- Agregar asignatura -->
+<div class="row">
+    <div class="col-md-12">
+        <h1>Agrega una nueva asignatura</h1>
+        <br/>
+    </div>
+</div>
+
+    <form method="post" asp-action="AgregarAsignatura" asp-controller="Home" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+        
+            <!-- <h3 class="col-md-12" style="color: #c4c4c4;">Datos</h3> -->
+      
+            <!--Nombre-->
+            <div class="form-group col-md-12">
+                <label asp-for="Nombre"></label>
+                <input asp-for="Nombre" class="form-control" placeholder="Juan" />
+            </div>
+
+            <!--No. del Aula-->
+            <div class="form-group col-md-12">
+                <label asp-for="Aula">No. del Aula</label>
+                <input asp-for="Aula" type="number" class="form-control" placeholder="#2  " />
+            </div>
+
+            <!--Profesor-->
+            <div class="form-group col-md-12">
+                <label asp-for="UserId"></label>
+                <select class="form-control" asp-for="UserId">
+                    @foreach (var profesor in Model.Profesores)
+                    {
+                        <option value="@profesor.Id">@profesor.Nombre</option>
+                    }
+                </select>   
+            </div>
+
+            <br/> 
+        </div>
+
+        <div class="row">
+            <!--Horario de clases de la materia-->
+
+            <!-- <h3 class="col-md-12" style="color: #c4c4c4;">Horario</h3> -->
+            
+            <!--TODO: Hacer la parte que permite seleccionar el horario de la asignatura-->
+            <div class="form-group col-md-6">
+                <label asp-for="Dia1">Primer día</label>
+                <div class="matmenu">
+                    <select asp-for="Dia1" asp-items="@Html.GetEnumSelectList<DiasSemana>()" class="form-control" id="Dia1"></select>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="Dia2">Segundo día</label>
+                <div class="matmenu">
+                    <select asp-for="Dia2" asp-items="@Html.GetEnumSelectList<DiasSemana>()" class="form-control" id="Dia2"></select>
+                </div>
+                <small class="form-text text-muted">Aquí debe seleccionar los dos días en los que será impartida esta materia</small>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="HoraEntrada">Hora de inicio</label>
+                <input asp-for="HoraEntrada" class="form-control" type="time"/>  
+            </div>    
+
+            <div class="form-group col-md-6">
+                <label asp-for="HoraSalida">Hora de fin</label>
+                <input asp-for="HoraSalida" class="form-control" type="time"/>  <br/>
+            </div>  
+
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Submit</button>
+            </div>
+        </div>
+
+    </form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
