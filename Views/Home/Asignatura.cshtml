@@ -1,10 +1,10 @@
-
+@model AsignaturaViewModel
 <!-- Materia -->
 <div class="row">
     <div class="col-md-12">
-        <h1>Asignatura Determinada</h1>
-        <h2 class="subtitulo eliminar-margen-entre-lineas">Sección: Lunes y Jueves de 10:00 a 13:00</h2>
-        <h3 class="subtitulo eliminar-margen-entre-lineas">Aula #1</h3>
+        <h1>@Model.Asignatura.Nombre</h1>
+        <h2 class="subtitulo eliminar-margen-entre-lineas">Sección @Model.Asignatura.Dia1 y @Model.Asignatura.Dia2 de @Model.Asignatura.HoraEntrada.ToString("HH:mm") a @Model.Asignatura.HoraSalida.ToString("HH:mm")</h2>
+        <h3 class="subtitulo eliminar-margen-entre-lineas">Aula #@Model.Asignatura.Aula</h3>
         <br/>
     </div>
 </div>

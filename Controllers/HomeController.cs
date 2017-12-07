@@ -52,7 +52,8 @@ namespace SistemaCalilficaciones.Controllers {
             }
 
             var viewModel = new IndexViewModel () {
-                Usuario = usuario
+                Usuario = usuario,
+                AsignaturasImpartidas = _context.Asignaturas.Where(a => a.UserId == usuario.Id).ToList()
             };
             return View (viewModel);
         }
@@ -68,8 +69,13 @@ namespace SistemaCalilficaciones.Controllers {
 
         // Muestra los datos de una Asignatura
         [HttpGet]
-        public IActionResult Asignatura () {
-            return View ();
+        public IActionResult Asignatura (int id) {
+            var asignatura = _context.Asignaturas.Where(a => a.Id == id).FirstOrDefault();
+            var viewModel = new AsignaturaViewModel()
+            {
+                Asignatura = asignatura
+            };
+            return View (viewModel);
         }
 
         // Gestiona las asignaturas
