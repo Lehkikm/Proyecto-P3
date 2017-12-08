@@ -1,0 +1,39 @@
+@model SeleccionarAsignaturasViewModel
+
+<h1>Selección de materias</h1>
+<br/>
+<table class="table table-striped table-hover table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Profesor</th>
+            <th>Horario</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var asignatura in Model.Asignaturas)
+        {
+            <tr>
+                <td>
+                    <input asp-for="MateriaSeleccionada" type="checkbox" value="@asignatura.Id">
+                </td>
+                <td>@asignatura.Nombre</td>
+                <td>@asignatura.User.Nombre</td>
+                <td>
+                    @asignatura.Dia1 y @asignatura.Dia2 de @asignatura.HoraEntrada.ToString("HH:mm") a @asignatura.HoraSalida.ToString("HH:mm")
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>Column content</td>
+                <td>Column content</td>
+                <td>Column content</td>
+            </tr>
+        }
+
+    </tbody>
+
+</table> 
+
+<button type="button" class="btn btn-primary">Guardar selección</button>

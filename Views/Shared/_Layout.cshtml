@@ -36,11 +36,21 @@
                 <li class="nav-item">
                     <a asp-area="" asp-controller="Home" asp-action="AgregarAsignatura" class="nav-link">Agregar nueva asignatura</a>
                 </li>
-                <!--Ver perfil-->
-                <li class="nav-item">
-                    <a asp-area="" asp-controller="Home" asp-action="PerfilUsuario" class="nav-link">Mi Perfil</a>
-                </li>
             }
+
+            <!--Ver perfil-->
+            <li class="nav-item">
+                <a asp-area="" asp-controller="Home" asp-action="PerfilUsuario" class="nav-link">Mi Perfil</a>
+            </li>
+
+            @if(this.User.IsInRole("Estudiante"))
+            {
+                <!--Agregar asignatura-->
+                <li class="nav-item">
+                    <a asp-area="" asp-controller="Home" asp-action="SeleccionarAsignaturas" class="nav-link">Seleccionar Materias</a>
+                </li> 
+            }
+            
         </ul>
         @await Html.PartialAsync("_LoginPartial")
     </div>

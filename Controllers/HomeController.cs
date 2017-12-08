@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SistemaCalilficaciones.Data;
 using SistemaCalilficaciones.Models;
 using SistemaCalilficaciones.Services;
@@ -90,7 +91,7 @@ namespace SistemaCalilficaciones.Controllers {
             anotacion.Fecha = DateTime.Now;
 
             _context.Anotaciones.Add (anotacion);
-            _context.SaveChanges();
+            _context.SaveChanges ();
             return RedirectToAction ("Asignatura", new { Id = viewModel.Asignatura.Id });
         }
 
@@ -171,7 +172,27 @@ namespace SistemaCalilficaciones.Controllers {
             }
         }
 
-        public IActionResult Error () {
+        [HttpGet]
+        public IActionResult SeleccionarAsignaturas ()
+        {
+            var viewModel = new SeleccionarAsignaturasViewModel()
+            {
+                Asignaturas = _context.Asignaturas
+                .Include(a => a.User)
+                .ToList()
+            };
+
+            return View (viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult SeleccionarAsignaturas (SeleccionarAsignaturasViewModel viewModel) 
+        {
+            return View ();
+        }
+
+        public IActionResult Error () 
+        {
             return View (new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
