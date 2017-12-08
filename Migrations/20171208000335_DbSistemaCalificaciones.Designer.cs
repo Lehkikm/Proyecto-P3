@@ -12,7 +12,7 @@ using System;
 namespace SistemaCalilficaciones.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171207184444_DbSistemaCalificaciones")]
+    [Migration("20171208000335_DbSistemaCalificaciones")]
     partial class DbSistemaCalificaciones
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

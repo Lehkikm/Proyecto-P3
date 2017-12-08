@@ -26,5 +26,7 @@ namespace SistemaCalilficaciones.Data
         public DbSet<Asignatura> Asignaturas { get; set; }
 
         public DbSet<Anotacion> Anotaciones { get; set; }
+
+        public DbSet<SeleccionMaterias> SeleccionMaterias { get; set; }
     }
 }   

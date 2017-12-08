@@ -173,26 +173,28 @@ namespace SistemaCalilficaciones.Controllers {
         }
 
         [HttpGet]
-        public IActionResult SeleccionarAsignaturas ()
-        {
-            var viewModel = new SeleccionarAsignaturasViewModel()
-            {
+        public IActionResult SeleccionarAsignaturas () {
+            var viewModel = new SeleccionarAsignaturasViewModel () {
                 Asignaturas = _context.Asignaturas
-                .Include(a => a.User)
-                .ToList()
+                .Include (a => a.User)
+                .ToList ()
             };
 
             return View (viewModel);
         }
 
         [HttpPost]
-        public IActionResult SeleccionarAsignaturas (SeleccionarAsignaturasViewModel viewModel) 
-        {
+        public IActionResult SeleccionarAsignaturas (SeleccionarAsignaturasViewModel viewModel) {
             return View ();
         }
 
-        public IActionResult Error () 
-        {
+        [HttpGet]
+        public IActionResult AsignaturasSeleccionadas () {
+         
+            return View ();
+        }
+
+        public IActionResult Error () {
             return View (new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
